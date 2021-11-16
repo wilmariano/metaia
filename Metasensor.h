@@ -29,6 +29,12 @@ class Metasensor {
 
     // Leitor do valor analógico de acordo com valor recebido
     int getDifuse_read_specific(int a, int b);
+
+    // Método de calibrar sensor de umidade solo - CAPACITIVO
+    void setSensor_Umidade_Capacitivo();
+
+    // Leitor do valor analógico de acordo com calibrado anteriormente - CAPACITIVO
+    int getSensor_Umidade_Capacitivo(int a, int b);
 };
 
 #endif

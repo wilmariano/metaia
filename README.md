@@ -1,4 +1,4 @@
-# Metasensor1.0
+# Metasensor1.1
 Library to calibrate sensor | Biblioteca para calibrar sensor
 
 ## How does it work | Como isso funciona
@@ -40,6 +40,22 @@ void loop() {
   int res2 = var.getDifuse_read_specific(1023, 500);
   Serial.print("O valor é: ");
   Serial.println(res2);  
+}
+```
+
+### Capacitive Humidity Sensor | Sensor de Umidade Capacitivo
+The reading is made from the average of the readings | A leitura é feita a partir da média das leituras (behind map command | comando map por trás)
+```
+#include <Metasensor.h>
+Metasensor var(15);
+void setup() {
+  Serial.begin(115200);  
+  // var.setSensor_Umidade_Capacitivo();
+  int res = var.getSensor_Umidade_Capacitivo(2804, 1334);
+  Serial.print("O valor é: ");
+  Serial.println(res);   
+}
+void loop() {
 }
 ```
 -----------------------------------------------
