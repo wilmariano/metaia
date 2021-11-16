@@ -61,4 +61,5 @@ void loop() {
 -----------------------------------------------
 ### Contributing | Contribuindo
 * Contributions are welcome! Please read our guide before contributing to help this project | As contribuições são bem-vindas! Por favor, leia nosso guia antes de contribuir para ajudar este projeto.
-### Todos os script rodando por trás da leitura do sensor de umidade do solo capacitivo tiveram como referência a matéria de Giovanni de Castro, clique <a href="https://www.robocore.net/tutoriais/leitura-umidade-solo"> AQUI </a> para acessar a matéria.
+### Referências
+* Todos os scripts rodando por trás da leitura do sensor de umidade do solo capacitivo tiveram como referência a matéria de Giovanni de Castro, clique <a href="https://www.robocore.net/tutoriais/leitura-umidade-solo"> AQUI </a> para acessar a matéria.
