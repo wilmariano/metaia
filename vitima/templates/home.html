@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<html>
+  <title>FRIDAY</title>
+  <head>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://user-images.githubusercontent.com/20112458/49326597-773b7280-f57a-11e8-853d-20ed61d18b0d.png"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+          font-family: monospace;
+        }
+        h1 {
+          background-color: yellow;
+          display: inline-block;
+          font-size: 3em;
+          margin: 0;
+          padding: 14px;
+        }
+        h3 {
+          color: black;
+          font-size: 20px;
+          margin-top: 3px;
+          text-align: center;
+        }
+        #chatbox {
+          margin-left: auto;
+          margin-right: auto;
+          width: 40%;
+          margin-top: 10%;
+        }
+        #userInput {
+          margin-left: auto;
+          margin-right: auto;
+          width: 100%;
+        }
+        #textInput {
+          width: 90%;
+          border: none;
+          border-bottom: 3px solid black;
+          font-family: monospace;
+          font-size: 17px;
+        }
+        .userText {
+          color: white;
+          font-family: monospace;
+          font-size: 17px;
+          text-align: right;
+          line-height: 30px;
+        }
+        .userText span {
+          background-color: #808080;
+          padding: 10px;
+          border-radius: 2px;
+        }
+        .botText {
+          color: white;
+          font-family: monospace;
+          font-size: 17px;
+          text-align: left;
+          line-height: 30px;
+        }
+        .botText span {
+          background-color: #4169e1;
+          padding: 10px;
+          border-radius: 2px;
+        }
+        #tidbit {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          width: 300px;
+        }
+        .boxed {
+          margin-left: auto;
+          margin-right: auto;
+          width: 78%;
+          margin-top: 60px;
+          border: 1px solid green;
+        }
+        .box {
+          border: 2px solid black;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <span class="col">
+        <img class="img-fluid d-block mx-auto" style="position:relative;float:left;border-radius: 50%;width:35px;height:35px;" src="https://s2.glbimg.com/BmX3tM8HgOpDmBpVzdJDkxA1Jrk=/0x0:400x400/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2018/Z/p/LvrSncTxGodAiaEbwLgQ/pegabot.jpg" alt="">    
+      </span>
+      <span style="font-family: monospace;font-size: 17px;" class="col">FRIDAY</span>
+      <hr>
+    </div>
+    <!--     <div class="boxed"> -->
+    <div id="chatbox">
+      <p class="botText">
+        <span>Diga algo kk</span>
+      </p>
+    </div>
+    <div id="userInput" class="input-group">
+      <span class="input-group-text"><i class="fas fa-microphone" onclick="runSpeechRecognition()"></i></span>
+      <input id="textInput" type="text" name="msg" placeholder="Message" class="form-control" />
+    <!--           <i class="fas fa-volume-up" id="btnSpeak"></i> -->
+    <!--             <button type="button" onclick="runSpeechRecognition()">Falar com Bot</button> &nbsp; <span id="action"></span>
+                <button id="btnSpeak">Ouvir Bot</button> -->
+    </div>
+    <!--     </div> -->
+  </body>
+  <script>
+    var falar = "";
+    function getBotResponse() {
+      var rawText = $("#textInput").val();
+      var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+      $("#textInput").val("");
+      $("#chatbox").append(userHtml);
+      document
+        .getElementById("userInput")
+        .scrollIntoView({ block: "start", behavior: "smooth" });
+      $.get("/get", { msg: rawText }).done(function(data) {
+        var botHtml = '<p class="botText"><span>' + data + "</span></p>";
+        falar = data;
+        $("#chatbox").append(botHtml);
+          document
+            .getElementById("userInput")
+            .scrollIntoView({ block: "start", behavior: "smooth" });
+      });	 
+    }
+    $("#textInput").keypress(function(e) {
+      if (e.which == 13) {
+        getBotResponse();
+      }
+    });
+		function runSpeechRecognition() {
+		  // get output div reference
+		  var output = document.getElementById("textInput");
+		  // get action element reference
+		  var action = document.getElementById("action");
+      // new speech recognition object
+      var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+      var recognition = new SpeechRecognition();
+            
+      // This runs when the speech recognition service starts
+      recognition.onstart = function() {
+          action.innerHTML = "<small>listening, please speak...</small>";
+      };
+      recognition.onspeechend = function() {
+          action.innerHTML = "<small>stopped listening, hope you are done...</small>";
+          recognition.stop();
+      }
+              
+      // This runs when the speech recognition service returns result
+      recognition.onresult = function(event) {
+          var transcript = event.results[0][0].transcript;
+          var confidence = event.results[0][0].confidence;
+          // output.innerHTML = "<b>Text:</b> " + transcript + "<br/> <b>Confidence:</b> " + confidence*100+"%";
+          //output.classList.remove("hide");
+		      $("#textInput").val(transcript);
+      };
+      // start recognition
+      recognition.start();
+    }
+
+
+    var btnSpeak = document.querySelector('#btnSpeak');
+    speaks = [
+      {
+        "name": "Clarinha",
+        "lang":"pt-BR"
+      }
+    ]
+    btnSpeak.addEventListener('click', () => {
+      const msg = new SpeechSynthesisUtterance();
+      msg.volume = 1; //define o volume do áudio (de 0 a 1)
+      msg.rate = 1; // define a velocidade do áudio (0.1 a 1)
+      msg.pitch = 1; // define o tom em que o áudio é falado ( de 0 a 2)
+      msg.text = falar;
+    
+    
+      const voice = speaks[0];
+      // console.log(`Voice: ${voice.name} and Lang: ${voice.lang}`);
+      voice.voiceURI = voice.name; //voiceURI busca o servidor da voz escolhida, no caso, pt-BR defnido em voice.name
+      msg.lang = voice.lang; // Define o idioma a ser utilizado para a fala, no caso, o que foi definido para voice.lang
+    
+      speechSynthesis.speak(msg); //executa a voz
+    });
+  </script>
+  <!-- Footer -->
+  <footer class="py-3 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright © Botmaker williansmarianos 2021</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+</html>
+

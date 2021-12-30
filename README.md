@@ -1,65 +1,51 @@
-# Metasensor1.1
-Library to calibrate sensor | Biblioteca para calibrar sensor
+# Metaia1.1 - Pytyhon 3.9
+ | Chatbot (chatterbot lib) configurado como webscrapper para aprender com outros chatbot (chatterbot)
 
 ## How does it work | Como isso funciona
-Instantiate an object to library class with Analog Pin | Instancie um objeto para classe da biblioteca com pino analógico
+After downloading Chromedriver according to your Chrome version and installing Selenium, Chatterbot and Flask, configure this chatbot and enjoy | Após baixar Chromedriver de acordo com a versão do seu Chrome e instalar o Selenium, Chatterbot e Flask, configure este chatbot e divirta-se
+
+Watch out with xpath, they are used to map where to work with the page we target as a webcrapper | Atente-se com xpath, servem para mapear onde trabalhar com a página com a qual nos direcionamos como webcrapper
 ```
-Metasensor var(0);
+# Iniciando a conversa com o robô 'digitando' um 'oi' e enviando mensagem
+navegador.find_element_by_xpath('//*[@id="textInput"]').send_keys("oi")
+navegador.find_element_by_xpath('//*[@id="textInput"]').send_keys(u'\ue007')
 ```
 
-Start what was instantiated to calibrate your sensor | Inicie o que foi instanciado para calibrar seu sensor
+Put your own path to your Chromedriver and the victim chatbot link (I simulated my victim chatbot on my own machine) | Coloque o seu próprio caminho ao sei Chromedriver e o link do chatbot vítima (simulei meu chatbot vítima em minha própria máquina)
 ```
-var.init();
+# Coloque o caminho do Chromedriver e o link do chatbot vítima
+navegador = webdriver.Chrome("C:/chromedriver.exe")
+navegador.get("http://127.0.0.1:5000/")
 ```
 
-Run the command to read your analog pin with measured value previously | Rode o comando para ler seu pino analógico com valor medido anteriormente (behind map command | comando map por trás)
+Follow the steps below to get a site's xpath | Siga as etapas abaixo para obter o xpath de um site
+* Ctrl+Shift+c
+* Clique na seta e selecione o que quer mapear (Selecionei um input text)
+* Na parte de scripts selecionado do Inspecionar elemento, botão direito e copiar xpath
 ```
-int res = var.getDifuse_read();
-Serial.println(res);
+//*[@id="textInput"]
 ```
 -----------------------------------------------
-For option, you can get this value and set it manually (behind map command | comando map por trás)
+By option you can write in this field with the script (xpath to a Chatterbot with Flask) | Por opção pode escrever nesse campo com o script (xpath para um Chatterbot com Flask)
 ```
-int res2 = var.getDifuse_read_specific(1023, 500);
-Serial.print("O valor é: ");
+navegador.find_element_by_xpath('//*[@id="textInput"]').send_keys("oi")
 ```
 -----------------------------------------------
-Complete code Código completo
+Enter with the following script (xpath to a Chatterbot with Flask) | Dar enter com o seguinte script (xpath para um Chatterbot com Flask)
 ```
-#include <Metasensor.h>
-Metasensor var(0);
-void setup() 
-{
-  Serial.begin(115200);
-}
-void loop() {
-  // var.init();
-  // int res = var.getDifuse_read();
-  // Serial.print("O valor é: ");
-  // Serial.println(res);
-  int res2 = var.getDifuse_read_specific(1023, 500);
-  Serial.print("O valor é: ");
-  Serial.println(res2);  
-}
+navegador.find_element_by_xpath('//*[@id="textInput"]').send_keys(u'\ue007')
+```
+Capture a text with the following script (xpath to a Chatterbot with Flask) | Capturar um texto com o seguinte script (xpath para um Chatterbot com Flask)
+```
+user_input = navegador.find_element_by_xpath('//*[@id="chatbox"]/p/span')
 ```
 
-### Capacitive Humidity Sensor | Sensor de Umidade Capacitivo
-The reading is made from the average of the readings | A leitura é feita a partir da média das leituras (behind map command | comando map por trás)
-```
-#include <Metasensor.h>
-Metasensor var(15);
-void setup() {
-  Serial.begin(115200);  
-  // var.setSensor_Umidade_Capacitivo();
-  int res = var.getSensor_Umidade_Capacitivo(2804, 1334);
-  Serial.print("O valor é: ");
-  Serial.println(res);   
-}
-void loop() {
-}
-```
 -----------------------------------------------
 ### Contributing | Contribuindo
 * Contributions are welcome! Please read our guide before contributing to help this project | As contribuições são bem-vindas! Por favor, leia nosso guia antes de contribuir para ajudar este projeto.
 ### Referências
-* Todos os scripts rodando por trás da leitura do sensor de umidade do solo capacitivo tiveram como referência a matéria de Giovanni de Castro, clique <a href="https://www.robocore.net/tutoriais/leitura-umidade-solo"> AQUI </a> para acessar a matéria.
+* Todos os scripts contém biblioteca Chatterbot e Selenium (com Chromedriver), Microframework Flask
+* pip install ChatterBot
+* pip install Flask
+* pip install selenium
+* https://chromedriver.chromium.org/downloads
