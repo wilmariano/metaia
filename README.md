@@ -1,4 +1,4 @@
-# Metaia1.1 - Pytyhon 3.9
+# Metaia1.1 - Python 3.9
 Chatbot (chatterbot lib) configured as webscrapper to learn from others chatbot (chatterbot) | Chatbot (chatterbot lib) configurado como webscrapper para aprender com outros chatbot (chatterbot)
 
 ## How does it work | Como isso funciona
