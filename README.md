@@ -1,5 +1,5 @@
 # Metaia1.1 - Pytyhon 3.9
- | Chatbot (chatterbot lib) configurado como webscrapper para aprender com outros chatbot (chatterbot)
+Chatbot (chatterbot lib) configured as webscrapper to learn from others chatbot (chatterbot) | Chatbot (chatterbot lib) configurado como webscrapper para aprender com outros chatbot (chatterbot)
 
 ## How does it work | Como isso funciona
 After downloading Chromedriver according to your Chrome version and installing Selenium, Chatterbot and Flask, configure this chatbot and enjoy | Após baixar Chromedriver de acordo com a versão do seu Chrome e instalar o Selenium, Chatterbot e Flask, configure este chatbot e divirta-se
